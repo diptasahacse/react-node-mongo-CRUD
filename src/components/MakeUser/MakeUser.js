@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MakeUser = ({ user, setAllUsers, allUsers }) => {
+    const navigate =useNavigate();
     const { _id, name, email } = user;
     const userDeleteListener = (_id) => {
         const proceed = window.confirm('Are you sure want to delete..?');
@@ -22,6 +24,10 @@ const MakeUser = ({ user, setAllUsers, allUsers }) => {
 
 
     }
+    const userUpdateListener = (_id) =>{
+        navigate(`/user/${_id}`)
+
+    }
 
     return (
         <div className='col-lg-6 col-1'>
@@ -32,7 +38,7 @@ const MakeUser = ({ user, setAllUsers, allUsers }) => {
                 </div>
                 <div>
                     <button onClick={() => userDeleteListener(_id)} className='btn btn-sm btn-danger me-2'>Remove</button>
-                    <button className='btn btn-sm btn-info'>Update</button>
+                    <button onClick={() => userUpdateListener(_id)} className='btn btn-sm btn-info'>Update</button>
 
                 </div>
             </div>

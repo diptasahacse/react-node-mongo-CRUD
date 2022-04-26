@@ -12,25 +12,50 @@ const UpdateUser = () => {
         .then(res => res.json())
         .then(data => setUser(data))
     },[])
-    console.log(user)
+    
 
-    const handleUpdateUser = ()=>{
+    const handleUpdateUser = (event)=>{
+        event.preventDefault();
+
+        const name = nameRef.current.value;
+        const email = emailRef.current.value;
+        const updateUser = {
+            name,
+            email
+        }
+
+        fetch(`http://localhost:5000/users/${userId}`, {
+            method: "PUT",
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(updateUser)
+
+        })
+        .then(res => res.json())
+        .then(data => {
+            event.target.reset()
+            console.log(data)
+            
+        })
 
     }
     
     return (
         <Container>
             <h3>Update User</h3>
+            <div>
+                <p>Name: {user?.name}</p>
+                <p>Email: {user?.email}</p>
+            </div>
             <div  className='w-75 mx-auto'>
                 <Form onSubmit={handleUpdateUser}>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3" controlId="formBasicUpdateName">
                         <Form.Label>Full Name</Form.Label>
-                        <Form.Control ref={nameRef} value={user?.name} type="text" placeholder="Enter Name" />
+                        <Form.Control ref={nameRef} type="text" placeholder="Enter Name" />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="formBasicUpdateEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control ref={emailRef}  value={user?.email} type="email" placeholder="Email" />
+                        <Form.Control ref={emailRef} type="email" placeholder="Email" />
                     </Form.Group>
 
                     <Button variant="primary" type="submit">

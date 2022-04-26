@@ -24,7 +24,7 @@ const User = () => {
         .then(res => res.json())
         .then(data => {
             event.target.reset()
-            console.log(data)
+            
         })
 
     }

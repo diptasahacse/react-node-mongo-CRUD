@@ -8,12 +8,11 @@ const AllUsers = () => {
         .then(res => res.json())
         .then(data => setAllUsers(data))
     },[])
-    console.log(allUsers)
     return (
         <div className='pb-5'>
             <div className='row g-4'>
                 {
-                    allUsers.map(user => <MakeUser key={user._id} user={user}></MakeUser>)
+                    allUsers.map(user => <MakeUser key={user._id} setAllUsers={setAllUsers} allUsers={allUsers} user={user}></MakeUser>)
                 }
             </div>
             

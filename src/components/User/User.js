@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
+import AllUsers from '../AllUsers/AllUsers';
 
 const User = () => {
     const nameRef = useRef('');
@@ -21,7 +22,10 @@ const User = () => {
 
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            event.target.reset()
+            console.log(data)
+        })
 
     }
     return (
@@ -45,6 +49,8 @@ const User = () => {
                 </Form>
             </div>
             <h2>All Users</h2>
+            <AllUsers></AllUsers>
+
         </Container>
     );
 };
